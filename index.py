@@ -1,4 +1,5 @@
-from bottle import route, run, template,response
+from bottle import route, get,post,request,run, template,response
+
 import pymongo
 import json
 from bson import BSON,Code
@@ -10,7 +11,7 @@ test = "admin"
 db = client[test]
 print db.name
  
-@route('/<database>/<collection>')
+@get('/<database>/<collection>')
 def index(database,collection):
 	
 	response.content_type = 'application/json; charset=utf8'
@@ -18,7 +19,7 @@ def index(database,collection):
 	result = json.dumps(list(doc), sort_keys=True, indent=4, default=json_util.default)
 	return result
 
-@route('/<database>/<collection>/<id>')
+@get('/<database>/<collection>/<id>')
 def index(database,collection,id):
 
 	response.content_type = 'application/json; charset=utf8'
@@ -26,5 +27,6 @@ def index(database,collection,id):
 	result = json.dumps(doc, sort_keys=True, indent=4, default=json_util.default)
 	return result
  
+
  
 run(host='localhost', port=8080)
