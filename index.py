@@ -27,6 +27,10 @@ def index(database,collection,id):
 	result = json.dumps(doc, sort_keys=True, indent=4, default=json_util.default)
 	return result
  
-
+@post('/<database>/<collection>')
+def index(database,collection):
+	
+	response.content_type = 'application/json: charset=utf8'
+	return "hello"
  
 run(host='localhost', port=8080)
