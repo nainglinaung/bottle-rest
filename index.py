@@ -16,8 +16,15 @@ def index(database,collection):
 	doc = client[database][collection].find()
 	result = json.dumps(list(doc), sort_keys=True, indent=4, default=json_util.default)
 	return result
-	
- 
+
+@route('/<database>/<collection>/<id>')
+def index(database,collection,id):
+
+	response.content_type = 'application/json; charset=utf8'
+ 	doc = client[database][collection].find_one({"_id": ObjectId('id')})
+	result = json.dumps(list(doc), sort_keys=True, indent=4, default=json_util.default)
+	return result
+
  
  
 run(host='localhost', port=8080)
